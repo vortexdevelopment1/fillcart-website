@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .overscroll-contain {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+:root {
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Dedicated Logo Tokens (Figma Specification) */
+  --color-logo-text: #101828;
+  --color-logo-accent: #D49400;
+
+  /* Brand Primary Colors (Figma: #F5B800) */
+  --brand-yellow: #F5B800;
+  --color-primary: var(--brand-yellow);
+  --color-primary-hover: #E0A800;
+  --color-primary-dark: #D49400;
+  --color-primary-light: #FFF8E1;
+  --color-primary-pale: #FFF4DA;
+
+  --color-ink: #101828;
+  --color-ink-muted: #667085;
+  --color-ink-light: #9CA3AF;
+  --color-border: #E7E8E5;
+  --color-border-hover: #D8DBDF;
+
+  /* Feedback Colors */
+  --color-success: #16803C;
+  --color-discount-green: #16803C;
+  --color-discount-text: #FFFFFF;
+  --color-error: #B42318;
+  --color-warning: #F79009;
+  --color-info: #0284C7;
+
+  /* Offer Banners Tokens (Exact Figma Specification) */
+  --banner-bank-bg: linear-gradient(101.26deg, #FFE0E3 26.67%, #FFB4E2 95.61%);
+  --banner-bank-title: #9C000E;
+  --banner-wallet-bg: #FFF4DA;
+  --banner-wallet-title: #FF9F53;
+  --banner-label-color: #667085;
+  --banner-subtitle-color: #667085;
+
+  /* Footer Tokens (Exact Figma Specification) */
+  --footer-bg: #111925;
+  --footer-heading: #FFFFFF;
+  --footer-text: #828C9C;
+  --footer-desc: #8893A3;
+  --footer-copyright: #788596;
+  --footer-social-border: rgba(255, 255, 255, 0.12);
+  --footer-social-text: #D8DDE5;
+  --footer-divider: rgba(255, 255, 255, 0.1);
+
+  /* Product Section Tokens (Exact Figma) */
+  --product-card-bg: #FFFFFF;
+  --product-card-border: #E7E8E5;
+  --product-badge-discount-bg: #16803C;
+  --product-badge-discount-text: #FFFFFF;
+  --product-title-color: #101828;
+  --product-unit-color: #667085;
+  --product-price-color: #101828;
+  --product-old-price-color: #667085;
+  --product-btn-add-bg: var(--brand-yellow);
+  --product-btn-add-text: #101828;
+
+  --color-bg-page: #FFFFFF;
+  --color-bg-input: #F4F5F8;
+  --color-bg-hero: #FCF4E3;
+  --color-bg-chill: #C7E7FF;
+
+  /* Category Background Tokens (Exact Figma Position 1 to 12) */
+  --cat-1: #EDF7E8;   /* 1. Grocery */
+  --cat-2: #EAF5F8;   /* 2. Dairy */
+  --cat-3: #FCECEC;   /* 3. Chicken , Meat & Fish */
+  --cat-4: #F2EFF9;   /* 4. Electronics */
+  --cat-5: #FFF1DF;   /* 5. Stationery */
+  --cat-6: #FCECF1;   /* 6. Beauty */
+  --cat-7: #EEF7F5;   /* 7. Home Essentials */
+  --cat-8: #EDF3FA;   /* 8. Daily Care */
+  --cat-9: #FFF0EA;   /* 9. Fragrance & Grooming */
+  --cat-10: #F1F4EE;  /* 10. Sports */
+  --cat-11: #FFF4DF;  /* 11. Pet Care */
+  --cat-12: #E4FFDF;  /* 12. Paan Corner */
+
+  /* Named Category Tokens */
+  --cat-grocery: var(--cat-1);
+  --cat-dairy: var(--cat-2);
+  --cat-meat: var(--cat-3);
+  --cat-electronics: var(--cat-4);
+  --cat-stationery: var(--cat-5);
+  --cat-beauty: var(--cat-6);
+  --cat-home: var(--cat-7);
+  --cat-daily: var(--cat-8);
+  --cat-fragrance: var(--cat-9);
+  --cat-sports: var(--cat-10);
+  --cat-pet: var(--cat-11);
+  --cat-paan: var(--cat-12);
+
+  /* Aliases for backward compatibility */
+  --cat-tint-grocery: var(--cat-grocery);
+  --cat-tint-dairy: var(--cat-dairy);
+  --cat-tint-meat: var(--cat-meat);
+  --cat-tint-electronics: var(--cat-electronics);
+  --cat-tint-stationery: var(--cat-stationery);
+  --cat-tint-beauty: var(--cat-beauty);
+  --cat-tint-home: var(--cat-home);
+  --cat-tint-daily: var(--cat-daily);
+  --cat-tint-fragrance: var(--cat-fragrance);
+  --cat-tint-sports: var(--cat-sports);
+  --cat-tint-pet: var(--cat-pet);
+  --cat-tint-paan: var(--cat-paan);
+
+  /* Offer Banner Tints */
+  --banner-tint-pink: #FEDFE2;
+  --banner-tint-cream: #FFF4DA;
+  --banner-tint-blue: #E2F2FE;
+
+  /* Section Header Tokens */
+  --color-eyebrow: #936D00;
+  --color-section-title: #101828;
+  --color-link-view-all: #2F6842;
+}
+
+* {
+  font-family: var(--font-sans);
+}
+
+html, body {
+  background-color: #FFFFFF;
+  color: #101828;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input, select, textarea {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+/* Base custom utility classes */
+.bg-brand-yellow { background-color: var(--color-primary); }
+.bg-brand-yellow-hover:hover { background-color: var(--color-primary-hover); }
+.text-brand-ink { color: var(--color-ink); }
+.text-brand-muted { color: var(--color-ink-muted); }
+.border-brand-border { border-color: var(--color-border); }
+.bg-brand-input { background-color: var(--color-bg-input); }
+.bg-brand-hero { background-color: var(--color-bg-hero); }
+.bg-brand-chill { background-color: var(--color-bg-chill); }
+.bg-discount-badge { background-color: var(--color-discount-green); }
+
+/* Glassmorphism utilities */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes slideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-slide-right {
+  animation: slideRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Category Page Sidebar Utilities */
+.sidebar-thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #E5E7EB;
+  border-radius: 9999px;
+}
+.sidebar-thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #D1D5DB;
+}
+.sidebar-thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #E5E7EB transparent;
+}
+
+/* Category Range Slider (Exact Figma Styling) */
+.category-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 220px;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+  background-color: #F59E0B;
+  cursor: pointer;
+}
+
+.category-range-slider::-webkit-slider-runnable-track {
+  width: 220px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #F59E0B;
+}
+
+.category-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #F59E0B;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  margin-top: -6px;
+  transition: transform 0.1s ease;
+}
+
+.category-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+}
+
+.category-range-slider::-moz-range-track {
+  width: 220px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #F59E0B;
+  border: none;
+}
+
+.category-range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #F59E0B;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+/* Category Left Sidebar Scrollbar */
+.sidebar-inner-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #D1D5DB transparent;
+  scrollbar-gutter: stable;
+  overscroll-behavior: auto;
+}
+
+.sidebar-inner-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-inner-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-inner-scroll::-webkit-scrollbar-thumb {
+  background-color: #D1D5DB;
+  border-radius: 9999px;
+}
+
+/* Print styles for Legal Pages */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  nav, footer, .print-hide {
+    display: none !important;
+  }
+}
+
+

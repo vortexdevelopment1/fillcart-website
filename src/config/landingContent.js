@@ -1,0 +1,130 @@
+/**
+ * Landing page content configuration for sections without direct database APIs (e.g. promo banners)
+ */
+
+export const OFFER_BANNERS = [
+  {
+    id: "banner-bank",
+    eyebrow: "Pay smart",
+    title: "Bank offers",
+    highlight: "Up to 10% off",
+    subtext: "Instant discount on HDFC, ICICI & Axis cards",
+    bgTint: "#FEDFE2",
+    accentColor: "#991B1B",
+    buttonText: "Claim Offer",
+    link: "/categories?offers=true",
+    iconType: "creditCard",
+  },
+  {
+    id: "banner-wallet",
+    eyebrow: "Rewards",
+    title: "Wallet cashback",
+    highlight: "Get up to ₹100 back",
+    subtext: "On UPI & FillCarts wallet orders above ₹499",
+    bgTint: "#FFF4DA",
+    accentColor: "#92400E",
+    buttonText: "View Details",
+    link: "/categories?offers=true",
+    iconType: "wallet",
+  },
+  {
+    id: "banner-combo",
+    eyebrow: "Smart Combos",
+    title: "Everyday packs",
+    highlight: "Flat 20% off",
+    subtext: "Breakfast, dairy & fresh farm staples bundled",
+    bgTint: "#E2F2FE",
+    accentColor: "#1E40AF",
+    buttonText: "Shop Combos",
+    link: "/categories?cat=grocery",
+    iconType: "sparkles",
+  },
+];
+
+export const FIGMA_CATEGORIES = [
+  {
+    key: "grocery",
+    name: "Grocery",
+    tint: "#EDF7E8",
+    colorToken: "var(--cat-grocery, #EDF7E8)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "dairy",
+    name: "Dairy",
+    tint: "#EAF5F8",
+    colorToken: "var(--cat-dairy, #EAF5F8)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "meat",
+    name: "Chicken , Meat & Fish",
+    tint: "#FCECEC",
+    colorToken: "var(--cat-meat, #FCECEC)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "electronics",
+    name: "Electronics",
+    tint: "#F2EFF9",
+    colorToken: "var(--cat-electronics, #F2EFF9)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "stationery",
+    name: "Stationery",
+    tint: "#FFF1DF",
+    colorToken: "var(--cat-stationery, #FFF1DF)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "personal",
+    name: "Beauty",
+    tint: "#FCECF1",
+    colorToken: "var(--cat-beauty, #FCECF1)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "home",
+    name: "Home Essentials",
+    tint: "#EEF7F5",
+    colorToken: "var(--cat-home, #EEF7F5)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "daily",
+    name: "Daily Care",
+    tint: "#EDF3FA",
+    colorToken: "var(--cat-daily, #EDF3FA)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "fragrance",
+    name: "Fragrance & Grooming",
+    tint: "#FFF0EA",
+    colorToken: "var(--cat-fragrance, #FFF0EA)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "sports",
+    name: "Sports",
+    tint: "#F1F4EE",
+    colorToken: "var(--cat-sports, #F1F4EE)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "pet",
+    name: "Pet Care",
+    tint: "#FFF4DF",
+    colorToken: "var(--cat-pet, #FFF4DF)",
+    img: "/images/home/home-staples.png",
+  },
+  {
+    key: "paan",
+    name: "Paan Corner",
+    tint: "#E4FFDF",
+    colorToken: "var(--cat-paan, #E4FFDF)",
+    img: "/images/home/home-staples.png",
+  },
+];
+
