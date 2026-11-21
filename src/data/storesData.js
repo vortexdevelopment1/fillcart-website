@@ -69,54 +69,63 @@ export function resolveStoreMedia(store) {
   const slug = store.slug || "";
   const camelSlug = slug.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 
-  // Check imageMap.storeCover
-  let mappedCover = null;
+  // Check imageMap.storeCover: if key exists in imageMap.storeCover, use its value
+  let mappedCover = undefined;
   if (imageMap.storeCover) {
-    mappedCover =
-      imageMap.storeCover[slug] ||
-      imageMap.storeCover[camelSlug] ||
-      (slug.includes("fresh-mart") || slug.includes("fresh-market")
-        ? imageMap.storeCover.freshMarket || imageMap.storeCover["fresh-market"]
-        : null) ||
-      (slug.includes("bakery")
-        ? imageMap.storeCover.cityArtisanBakery || imageMap.storeCover["city-artisan-bakery"]
-        : null) ||
-      (slug.includes("green") || slug.includes("organic")
-        ? imageMap.storeCover.organicGreens || imageMap.storeCover["green-leaf-farm-organics"]
-        : null) ||
-      (slug.includes("daily")
-        ? imageMap.storeCover.dailyFreshOrganics || imageMap.storeCover["daily-needs-express"]
-        : null) ||
-      (slug.includes("pharmacy") || slug.includes("medplus") || slug.includes("wellness")
-        ? imageMap.storeCover.wellnessCornerPharmacy || imageMap.storeCover["medplus-pharmacy-wellness"]
-        : null);
+    if (slug in imageMap.storeCover) {
+      mappedCover = imageMap.storeCover[slug];
+    } else if (camelSlug in imageMap.storeCover) {
+      mappedCover = imageMap.storeCover[camelSlug];
+    } else if (slug.includes("fresh-mart") || slug.includes("fresh-market") || slug.includes("freshmart")) {
+      mappedCover = imageMap.storeCover["fresh-mart-supermarket"] ?? imageMap.storeCover.freshMarket;
+    } else if (slug.includes("daily")) {
+      mappedCover = imageMap.storeCover["daily-needs-express"] ?? imageMap.storeCover["daily-needs"];
+    } else if (slug.includes("indore")) {
+      mappedCover = imageMap.storeCover["indore-grocery"];
+    } else if (slug.includes("sharma")) {
+      mappedCover = imageMap.storeCover["sharma-super-store"];
+    } else if (slug.includes("city-mart")) {
+      mappedCover = imageMap.storeCover["city-mart"];
+    } else if (slug.includes("bakery")) {
+      mappedCover = imageMap.storeCover["city-artisan-bakery"] ?? imageMap.storeCover["city-mart"];
+    } else if (slug.includes("green") || slug.includes("organic")) {
+      mappedCover = imageMap.storeCover["green-leaf-farm-organics"] ?? imageMap.storeCover["indore-grocery"];
+    } else if (slug.includes("pharmacy") || slug.includes("medplus") || slug.includes("wellness")) {
+      mappedCover = imageMap.storeCover["medplus-pharmacy-wellness"] ?? imageMap.storeCover["sharma-super-store"];
+    }
   }
 
-  // Check imageMap.storeLogo
-  let mappedLogo = null;
+  // Check imageMap.storeLogo: if key exists in imageMap.storeLogo, use its value
+  let mappedLogo = undefined;
   if (imageMap.storeLogo) {
-    mappedLogo =
-      imageMap.storeLogo[slug] ||
-      imageMap.storeLogo[camelSlug] ||
-      (slug.includes("fresh-mart") || slug.includes("fresh-market")
-        ? imageMap.storeLogo.freshMarket || imageMap.storeLogo["fresh-market"]
-        : null) ||
-      (slug.includes("bakery")
-        ? imageMap.storeLogo.cityArtisanBakery || imageMap.storeLogo["city-artisan-bakery"]
-        : null) ||
-      (slug.includes("green") || slug.includes("organic")
-        ? imageMap.storeLogo.organicGreens || imageMap.storeLogo["green-leaf-farm-organics"]
-        : null) ||
-      (slug.includes("daily")
-        ? imageMap.storeLogo.dailyFreshOrganics || imageMap.storeLogo["daily-needs-express"]
-        : null) ||
-      (slug.includes("pharmacy") || slug.includes("medplus") || slug.includes("wellness")
-        ? imageMap.storeLogo.wellnessCornerPharmacy || imageMap.storeLogo["medplus-pharmacy-wellness"]
-        : null);
+    if (slug in imageMap.storeLogo) {
+      mappedLogo = imageMap.storeLogo[slug];
+    } else if (camelSlug in imageMap.storeLogo) {
+      mappedLogo = imageMap.storeLogo[camelSlug];
+    } else if (slug.includes("fresh-mart") || slug.includes("fresh-market") || slug.includes("freshmart")) {
+      mappedLogo = imageMap.storeLogo["fresh-mart-supermarket"] ?? imageMap.storeLogo.freshMarket;
+    } else if (slug.includes("daily")) {
+      mappedLogo = imageMap.storeLogo["daily-needs-express"] ?? imageMap.storeLogo["daily-needs"];
+    } else if (slug.includes("indore")) {
+      mappedLogo = imageMap.storeLogo["indore-grocery"];
+    } else if (slug.includes("sharma")) {
+      mappedLogo = imageMap.storeLogo["sharma-super-store"];
+    } else if (slug.includes("city-mart")) {
+      mappedLogo = imageMap.storeLogo["city-mart"];
+    } else if (slug.includes("bakery")) {
+      mappedLogo = imageMap.storeLogo["city-artisan-bakery"] ?? imageMap.storeLogo["city-mart"];
+    } else if (slug.includes("green") || slug.includes("organic")) {
+      mappedLogo = imageMap.storeLogo["green-leaf-farm-organics"] ?? imageMap.storeLogo["indore-grocery"];
+    } else if (slug.includes("pharmacy") || slug.includes("medplus") || slug.includes("wellness")) {
+      mappedLogo = imageMap.storeLogo["medplus-pharmacy-wellness"] ?? imageMap.storeLogo["sharma-super-store"];
+    }
   }
 
-  const cover = mappedCover ? encodeURI(mappedCover) : (store.cover ? encodeURI(store.cover) : "");
-  const logo = mappedLogo ? encodeURI(mappedLogo) : (store.logo ? encodeURI(store.logo) : cover);
+  const rawCover = mappedCover !== undefined ? mappedCover : (store.cover && !String(store.cover).includes("unsplash.com") ? store.cover : null);
+  const rawLogo = mappedLogo ? mappedLogo : (store.logo && !String(store.logo).includes("unsplash.com") ? store.logo : rawCover);
+
+  const cover = rawCover ? encodeURI(rawCover) : "";
+  const logo = rawLogo ? encodeURI(rawLogo) : cover;
 
   return { cover, logo };
 }
@@ -890,37 +899,19 @@ export const FRESH_MART_SECTIONS = [
 
 export const stores = [
   {
-    slug: "city-artisan-bakery",
-    name: "City Artisan Bakery",
-    eyebrow: "FRESH FROM THE OVEN",
-    tags: "Bakery · Bread · Cakes · Snacks",
-    area: "[Area]", // TEMP DEFAULT
-    city: "[City]", // TEMP DEFAULT
-    cover: STORE_IMAGE_MAP.cityBakery,
-    logo: STORE_IMAGE_MAP.cityBakery,
-    verified: true,
-    logoText: "CA",
-    rating: 4.7,
-    ratingCount: "890",
-    deliveryTime: "20-25 min",
-    freeDeliveryAbove: 199,
-    bestSellers: FRESH_MART_BEST_SELLERS,
-    sections: FRESH_MART_SECTIONS,
-  },
-  {
     slug: "fresh-mart-supermarket",
-    name: "Fresh Market",
+    name: "FreshMart",
     eyebrow: "YOUR EVERYDAY GROCERY",
     tags: "Grocery · Vegetables · Daily Needs",
     area: "[Area]", // TEMP DEFAULT
     city: "[City]", // TEMP DEFAULT
-    cover: STORE_IMAGE_MAP.freshMart,
-    logo: STORE_IMAGE_MAP.freshMart,
+    cover: imageMap.storeCover["fresh-mart-supermarket"],
+    logo: imageMap.storeLogo["fresh-mart-supermarket"],
     verified: true,
     logoText: "FM",
-    rating: 4.6,
+    rating: 4.8,
     ratingCount: "1.2K",
-    deliveryTime: "15–20 min",
+    deliveryTime: "12 min",
     distance: "0.8 km",
     minOrder: 149,
     freeDeliveryAbove: 199,
@@ -946,38 +937,97 @@ export const stores = [
     sections: FRESH_MART_SECTIONS,
   },
   {
+    slug: "daily-needs-express",
+    name: "Daily Needs",
+    eyebrow: "HOUSEHOLD & ESSENTIALS",
+    tags: "Groceries · Daily Needs · Essentials",
+    area: "[Area]", // TEMP DEFAULT
+    city: "[City]", // TEMP DEFAULT
+    cover: imageMap.storeCover["daily-needs-express"],
+    logo: imageMap.storeLogo["daily-needs-express"],
+    verified: true,
+    logoText: "DN",
+    rating: 4.7,
+    ratingCount: "1.1K",
+    deliveryTime: "18 min",
+    distance: "1.2 km",
+    freeDeliveryAbove: 299,
+    bestSellers: FRESH_MART_BEST_SELLERS,
+    sections: FRESH_MART_SECTIONS,
+  },
+  {
+    slug: "indore-grocery",
+    name: "Indore Grocery",
+    eyebrow: "FRESH & ESSENTIALS",
+    tags: "Grocery · Daily Essentials",
+    area: "[Area]", // TEMP DEFAULT
+    city: "[City]", // TEMP DEFAULT
+    cover: imageMap.storeCover["indore-grocery"],
+    logo: imageMap.storeLogo["indore-grocery"],
+    verified: true,
+    logoText: "IG",
+    rating: 4.9,
+    ratingCount: "1.5K",
+    deliveryTime: "20 min",
+    distance: "1.5 km",
+    freeDeliveryAbove: 249,
+    bestSellers: FRESH_MART_BEST_SELLERS,
+    sections: FRESH_MART_SECTIONS,
+  },
+  {
+    slug: "sharma-super-store",
+    name: "Sharma Super Store",
+    eyebrow: "LOCAL & ORGANIC PRODUCE",
+    tags: "Organic · Fruits · Vegetables",
+    area: "[Area]", // TEMP DEFAULT
+    city: "[City]", // TEMP DEFAULT
+    cover: imageMap.storeCover["sharma-super-store"],
+    logo: imageMap.storeLogo["sharma-super-store"],
+    verified: true,
+    logoText: "SS",
+    rating: 4.6,
+    ratingCount: "1.9K",
+    deliveryTime: "24 min",
+    distance: "1.9 km",
+    freeDeliveryAbove: 199,
+    bestSellers: FRESH_MART_BEST_SELLERS,
+    sections: FRESH_MART_SECTIONS,
+  },
+  {
+    slug: "city-mart",
+    name: "City Mart",
+    eyebrow: "FRESH FROM THE MARKET",
+    tags: "Fruits · Vegetables · Market",
+    area: "[Area]", // TEMP DEFAULT
+    city: "[City]", // TEMP DEFAULT
+    cover: imageMap.storeCover["city-mart"],
+    logo: imageMap.storeLogo["city-mart"],
+    verified: true,
+    logoText: "CM",
+    rating: 4.7,
+    ratingCount: "2.3K",
+    deliveryTime: "28 min",
+    distance: "2.3 km",
+    freeDeliveryAbove: 199,
+    bestSellers: FRESH_MART_BEST_SELLERS,
+    sections: FRESH_MART_SECTIONS,
+  },
+  {
     slug: "green-leaf-farm-organics",
     name: "Green Leaf Farm Organics",
     eyebrow: "FARM FRESH & ORGANIC",
     tags: "Organic · Fruits · Vegetables",
     area: "[Area]", // TEMP DEFAULT
     city: "[City]", // TEMP DEFAULT
-    cover: STORE_IMAGE_MAP.greenOrganics,
-    logo: STORE_IMAGE_MAP.greenOrganics,
+    cover: imageMap.storeCover["green-leaf-farm-organics"],
+    logo: imageMap.storeLogo["green-leaf-farm-organics"],
     verified: true,
     logoText: "GL",
     rating: 4.8,
     ratingCount: "1.4K",
-    deliveryTime: "15-20 min",
+    deliveryTime: "20 min",
+    distance: "1.5 km",
     freeDeliveryAbove: 249,
-    bestSellers: FRESH_MART_BEST_SELLERS,
-    sections: FRESH_MART_SECTIONS,
-  },
-  {
-    slug: "daily-needs-express",
-    name: "Daily Needs Express",
-    eyebrow: "HOUSEHOLD & ESSENTIALS",
-    tags: "Groceries · Daily Needs · Essentials",
-    area: "[Area]", // TEMP DEFAULT
-    city: "[City]", // TEMP DEFAULT
-    cover: STORE_IMAGE_MAP.dailyNeeds,
-    logo: STORE_IMAGE_MAP.dailyNeeds,
-    verified: true,
-    logoText: "DN",
-    rating: 4.6,
-    ratingCount: "1.1K",
-    deliveryTime: "15-20 min",
-    freeDeliveryAbove: 299,
     bestSellers: FRESH_MART_BEST_SELLERS,
     sections: FRESH_MART_SECTIONS,
   },
@@ -988,13 +1038,33 @@ export const stores = [
     tags: "Medicines · Wellness · Personal Care",
     area: "[Area]", // TEMP DEFAULT
     city: "[City]", // TEMP DEFAULT
-    cover: STORE_IMAGE_MAP.medPlus,
-    logo: STORE_IMAGE_MAP.medPlus,
+    cover: imageMap.storeCover["medplus-pharmacy-wellness"],
+    logo: imageMap.storeLogo["medplus-pharmacy-wellness"],
     verified: true,
     logoText: "MP",
-    rating: 4.9,
+    rating: 4.6,
     ratingCount: "2.1K",
-    deliveryTime: "10-15 min",
+    deliveryTime: "24 min",
+    distance: "1.9 km",
+    freeDeliveryAbove: 199,
+    bestSellers: FRESH_MART_BEST_SELLERS,
+    sections: FRESH_MART_SECTIONS,
+  },
+  {
+    slug: "city-artisan-bakery",
+    name: "City Artisan Bakery",
+    eyebrow: "FRESH FROM THE OVEN",
+    tags: "Bakery · Bread · Cakes · Snacks",
+    area: "[Area]", // TEMP DEFAULT
+    city: "[City]", // TEMP DEFAULT
+    cover: imageMap.storeCover["city-artisan-bakery"],
+    logo: imageMap.storeLogo["city-artisan-bakery"],
+    verified: true,
+    logoText: "CA",
+    rating: 4.7,
+    ratingCount: "890",
+    deliveryTime: "28 min",
+    distance: "2.3 km",
     freeDeliveryAbove: 199,
     bestSellers: FRESH_MART_BEST_SELLERS,
     sections: FRESH_MART_SECTIONS,
@@ -1007,13 +1077,20 @@ export const stores = [
 export function getStore(slug) {
   if (!slug) return null;
   const target = String(slug).toLowerCase().trim();
-  const directMatch = stores.find((s) => s.slug.toLowerCase() === target);
+  let directMatch = stores.find((s) => s.slug.toLowerCase() === target);
   let store = directMatch;
-  if (!store && target === "fresh-market") {
-    const base = stores.find((s) => s.slug === "fresh-mart-supermarket");
-    if (base) store = { ...base, name: "Fresh Market", slug: "fresh-market" };
-  } else if (!store && (target === "fresh-mart" || target === "fresh-mart-supermarket")) {
-    store = stores.find((s) => s.slug === "fresh-mart-supermarket") || null;
+  if (!store) {
+    if (target === "fresh-market" || target === "fresh-mart" || target === "freshmart") {
+      store = stores.find((s) => s.slug === "fresh-mart-supermarket");
+    } else if (target === "daily-needs") {
+      store = stores.find((s) => s.slug === "daily-needs-express");
+    } else if (target === "green-leaf-farm-organics" || target === "organic-greens") {
+      store = stores.find((s) => s.slug === "green-leaf-farm-organics" || s.slug === "indore-grocery");
+    } else if (target === "medplus-pharmacy-wellness" || target === "wellness-corner-pharmacy") {
+      store = stores.find((s) => s.slug === "medplus-pharmacy-wellness" || s.slug === "sharma-super-store");
+    } else if (target === "city-artisan-bakery") {
+      store = stores.find((s) => s.slug === "city-artisan-bakery" || s.slug === "city-mart");
+    }
   }
   if (!store) return null;
 

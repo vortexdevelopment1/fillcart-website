@@ -11,7 +11,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ListingProductCard from "../components/ListingProductCard";
 import CategoryHeroBanner from "../components/CategoryHeroBanner";
-import CategoryPromoBanners from "../components/CategoryPromoBanners";
 import CategoryTile from "../components/CategoryTile";
 import { imageMap } from "../config/imageMap";
 import {
@@ -976,9 +975,6 @@ export default function CategoryListingPage() {
                   </button>
                 </div>
               )}
-
-              {/* Promo Banners at bottom of right column */}
-              <CategoryPromoBanners />
             </section>
           </div>
         </div>

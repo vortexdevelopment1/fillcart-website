@@ -10,38 +10,57 @@
 export const imageMap = {
   // 1. STORE COVERS & STORE LOGOS
   storeCover: {
-    freshMarket: "/images/stores/fresh-mart-storefront.svg",
-    "fresh-mart-supermarket": "/images/stores/fresh-mart-storefront.svg",
-    "fresh-market": "/images/stores/fresh-mart-storefront.svg",
-    "fresh-mart": "/images/stores/fresh-mart-storefront.svg",
-    cityArtisanBakery: null, // NEEDS USER DECISION: no dedicated storefront photo in public/
-    "city-artisan-bakery": null,
-    dailyFreshOrganics: null, // NEEDS USER DECISION: no dedicated storefront photo in public/
-    "daily-fresh-organics": null,
-    "daily-needs-express": null,
-    organicGreens: null, // NEEDS USER DECISION: no dedicated storefront photo in public/
-    "organic-greens": null,
-    "green-leaf-farm-organics": null,
-    wellnessCornerPharmacy: null, // NEEDS USER DECISION: no dedicated storefront photo in public/
-    "wellness-corner-pharmacy": null,
-    "medplus-pharmacy-wellness": null,
+    // 5 Figma sequence stores
+    "fresh-mart-supermarket": "/images/stores/fresh-mart-supermarket-cover.png",
+    freshmart: "/images/stores/freshmart-cover.png",
+    "fresh-mart": "/images/stores/fresh-mart-supermarket-cover.png",
+    "fresh-market": "/images/stores/fresh-mart-supermarket-cover.png",
+    freshMarket: "/images/stores/fresh-mart-supermarket-cover.png",
+
+    "daily-needs-express": "/images/stores/daily-needs-express-cover.png",
+    "daily-needs": "/images/stores/daily-needs-cover.png",
+    dailyFreshOrganics: "/images/stores/daily-needs-express-cover.png",
+    "daily-fresh-organics": "/images/stores/daily-needs-express-cover.png",
+
+    "indore-grocery": "/images/stores/indore-grocery-cover.png",
+    "green-leaf-farm-organics": "/images/stores/green-leaf-farm-organics-cover.png",
+    organicGreens: "/images/stores/green-leaf-farm-organics-cover.png",
+    "organic-greens": "/images/stores/green-leaf-farm-organics-cover.png",
+
+    "sharma-super-store": "/images/stores/sharma-super-store-cover.png",
+    "medplus-pharmacy-wellness": "/images/stores/medplus-pharmacy-wellness-cover.png",
+    wellnessCornerPharmacy: "/images/stores/medplus-pharmacy-wellness-cover.png",
+    "wellness-corner-pharmacy": "/images/stores/medplus-pharmacy-wellness-cover.png",
+
+    "city-mart": "/images/stores/city-mart-cover.png",
+    "city-artisan-bakery": "/images/stores/city-artisan-bakery-cover.png",
+    cityArtisanBakery: "/images/stores/city-artisan-bakery-cover.png",
   },
   storeLogo: {
-    freshMarket: "/images/stores/fresh-mart-logo.svg",
     "fresh-mart-supermarket": "/images/stores/fresh-mart-logo.svg",
+    freshmart: "/images/stores/fresh-mart-logo.svg",
     "fresh-market": "/images/stores/fresh-mart-logo.svg",
     "fresh-mart": "/images/stores/fresh-mart-logo.svg",
-    cityArtisanBakery: null, // NEEDS USER DECISION: no dedicated store logo in public/
-    "city-artisan-bakery": null,
-    dailyFreshOrganics: null, // NEEDS USER DECISION: no dedicated store logo in public/
-    "daily-fresh-organics": null,
-    "daily-needs-express": null,
-    organicGreens: null, // NEEDS USER DECISION: no dedicated store logo in public/
-    "organic-greens": null,
-    "green-leaf-farm-organics": null,
-    wellnessCornerPharmacy: null, // NEEDS USER DECISION: no dedicated store logo in public/
-    "wellness-corner-pharmacy": null,
-    "medplus-pharmacy-wellness": null,
+    freshMarket: "/images/stores/fresh-mart-logo.svg",
+
+    "daily-needs-express": "/images/stores/daily-needs-express-cover.png",
+    "daily-needs": "/images/stores/daily-needs-cover.png",
+    dailyFreshOrganics: "/images/stores/daily-needs-express-cover.png",
+    "daily-fresh-organics": "/images/stores/daily-needs-express-cover.png",
+
+    "indore-grocery": "/images/stores/indore-grocery-cover.png",
+    "green-leaf-farm-organics": "/images/stores/green-leaf-farm-organics-cover.png",
+    organicGreens: "/images/stores/green-leaf-farm-organics-cover.png",
+    "organic-greens": "/images/stores/green-leaf-farm-organics-cover.png",
+
+    "sharma-super-store": "/images/stores/sharma-super-store-cover.png",
+    "medplus-pharmacy-wellness": "/images/stores/medplus-pharmacy-wellness-cover.png",
+    wellnessCornerPharmacy: "/images/stores/medplus-pharmacy-wellness-cover.png",
+    "wellness-corner-pharmacy": "/images/stores/medplus-pharmacy-wellness-cover.png",
+
+    "city-mart": "/images/stores/city-mart-cover.png",
+    "city-artisan-bakery": "/images/stores/city-artisan-bakery-cover.png",
+    cityArtisanBakery: "/images/stores/city-artisan-bakery-cover.png",
   },
 
   // 2. CATEGORY TILES (Store Detail Page & Category Page - SVG Assets)
@@ -81,11 +100,11 @@ export const imageMap = {
 
   // 5. PAYMENT & SPECIAL OFFERS BANNERS
   offerBanner: {
-    bankOffers: "/offer-bank-cards.png",
+    bankOffers: "/images/offers/offer-bank-cards.png",
     bankCardRed: "/images/home/home-frozen-food.png",
     bankCardPurple: "/images/home/home-pharma.png",
     walletCashback: "/images/home/home-wellness.png",
-    walletCashbackAlt: "/offer-wallet.png",
+    walletCashbackAlt: "/images/offers/offer-wallet.png",
     comboOffer: "/images/home/home-organic.png",
   },
 

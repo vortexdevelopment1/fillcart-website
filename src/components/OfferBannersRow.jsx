@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { imageMap } from "../config/imageMap";
 
 /**
  * OfferBannersRow Component (Exact Figma Specification)
@@ -92,7 +93,7 @@ export default function OfferBannersRow({ loading = false, className = "" }) {
 
           {/* Right Bank Cards Image (Red Kotak card + Purple card): Anchored bottom right */}
           <img
-            src="/offer-bank-cards.png"
+            src={imageMap.offerBanner?.bankOffers || "/images/offers/offer-bank-cards.png"}
             alt=""
             width={130}
             height={78}
@@ -145,7 +146,7 @@ export default function OfferBannersRow({ loading = false, className = "" }) {
 
           {/* Right Wallet Image: Centered vertically, 20px from right edge, uncropped */}
           <img
-            src="/images/home/home-wellness.png"
+            src={imageMap.offerBanner?.walletCashback || "/images/home/home-wellness.png"}
             alt=""
             width={64}
             height={68}
@@ -162,7 +163,7 @@ export default function OfferBannersRow({ loading = false, className = "" }) {
           className="w-[293.5px] min-w-[293.5px] max-w-[293.5px] h-[116px] rounded-[32px] overflow-hidden relative shrink-0 snap-start select-none no-underline transition-transform duration-200 hover:-translate-y-[2px] motion-reduce:transition-none motion-reduce:hover:transform-none cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#F5B800] focus-visible:ring-offset-2"
         >
           <img
-            src="/images/home/home-organic.png"
+            src={imageMap.offerBanner?.comboOffer || "/images/home/home-organic.png"}
             alt="Combo offer"
             width={294}
             height={116}

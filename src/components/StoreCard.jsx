@@ -1,6 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Star, Clock, ChevronRight } from "lucide-react";
+import { imageMap } from "../config/imageMap";
+
+// Soft store theme colours taken from existing tile colours palette
+const STORE_THEME_COLORS = {
+  "fresh-mart-supermarket": "#FFF8E8",
+  freshmart: "#FFF8E8",
+  "daily-needs-express": "#F2F3F6",
+  "daily-needs": "#F2F3F6",
+  "indore-grocery": "#F0F8E8",
+  "green-leaf-farm-organics": "#F0F8E8",
+  "sharma-super-store": "#FFF0F0",
+  "medplus-pharmacy-wellness": "#FFF0F0",
+  "city-mart": "#FFF4E6",
+  "city-artisan-bakery": "#FFF4E6",
+};
 
 /**
  * Reusable StoreCard Component (Exact Figma Specification)
@@ -21,11 +36,31 @@ export default function StoreCard({ store, className = "" }) {
   if (!store) return null;
 
   const name = store.name || store.storeName || "Store";
-  const cover =
-    store.coverImageUrl ||
-    store.coverImage ||
-    store.img ||
-    "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&auto=format&fit=crop&q=80";
+  const storeSlug =
+    store.slug ||
+    (name ? name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") : "");
+  const targetUrl = storeSlug ? `/store/${storeSlug}` : `/stores`;
+
+  // Look up store cover from imageMap (same source StoreDetailPage uses)
+  const mappedCover =
+    (imageMap?.storeCover && storeSlug && imageMap.storeCover[storeSlug]) ??
+    (store.cover && !String(store.cover).includes("unsplash.com") ? store.cover : null);
+  const cover = mappedCover || null;
+
+  // Look up store logo from imageMap
+  const mappedLogo =
+    (imageMap?.storeLogo && storeSlug && imageMap.storeLogo[storeSlug]) ??
+    (store.logo && !String(store.logo).includes("unsplash.com") ? store.logo : null);
+  const logo = mappedLogo || null;
+
+  // Theme color for neutral card background
+  const bgColor = STORE_THEME_COLORS[storeSlug] || "#F4F5F8";
+
+  // Initials for store fallback
+  const initials = (
+    store.logoText ||
+    (name ? name.split(" ").map((w) => w[0]).join("").slice(0, 2) : "ST")
+  ).toUpperCase();
 
   // Data Rules: Only display if real data exists. No fake values!
   const deliveryTime = store.deliveryTimeEstimate || store.deliveryTime || null;
@@ -37,11 +72,6 @@ export default function StoreCard({ store, className = "" }) {
     store.distance ||
     (store.distanceKm != null ? `${Number(store.distanceKm).toFixed(1)} km` : null);
 
-  const storeSlug =
-    store.slug ||
-    (name ? name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") : "");
-  const targetUrl = storeSlug ? `/store/${storeSlug}` : `/stores`;
-
   return (
     <Link
       to={targetUrl}
@@ -52,20 +82,42 @@ export default function StoreCard({ store, className = "" }) {
       }}
     >
       {/* Row 1: Cover Photo (104px tall, approx 62% of card height) */}
-      <div className="relative w-full h-[104px] overflow-hidden bg-[#F4F5F8]">
-        <img
-          src={cover}
-          alt={name}
-          width={230}
-          height={104}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+      <div
+        className="relative w-full h-[104px] overflow-hidden flex items-center justify-center select-none"
+        style={{ backgroundColor: bgColor }}
+      >
+        {cover ? (
+          <img
+            src={cover}
+            alt={name}
+            width={230}
+            height={104}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            {logo ? (
+              <img
+                src={logo}
+                alt={name}
+                className="w-12 h-12 object-contain rounded-full shadow-[0_1px_3px_rgba(0,0,0,0.08)] bg-white/90 p-1"
+              />
+            ) : (
+              <div
+                className="w-12 h-12 rounded-full bg-white/90 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex items-center justify-center font-bold text-sm tracking-wide text-[#101828]"
+                style={{ fontFamily: "var(--font-sans, 'Manrope', sans-serif)" }}
+              >
+                {initials}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Delivery Time Pill on photo (bottom-right: 10px from edges) */}
         {deliveryTime && (
-          <span className="absolute bottom-[10px] right-[10px] bg-white text-[#101828] h-[22px] px-[10px] rounded-full shadow-[0_1px_3px_rgba(0,0,0,0.12)] flex items-center gap-1 pointer-events-none">
+          <span className="absolute bottom-[10px] right-[10px] bg-white text-[#101828] h-[22px] px-[10px] rounded-full shadow-[0_1px_3px_rgba(0,0,0,0.12)] flex items-center gap-1 pointer-events-none z-10">
             <Clock size={11} className="text-[#101828] shrink-0" />
             <span
               className="font-bold text-[10px] leading-none text-[#101828]"

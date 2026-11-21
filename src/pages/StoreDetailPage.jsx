@@ -339,6 +339,10 @@ function OpenNowPill({ isOpen = true }) {
 function StoreHero({ store }) {
   const [logoError, setLogoError] = useState(false);
 
+  useEffect(() => {
+    setLogoError(false);
+  }, [store?.logo, store?.slug]);
+
   // Delivery string clean up: replace hyphens with en-dash
   const rawDelivery = store.deliveryTime || "15–20 min";
   const deliveryClean = rawDelivery.replace("-", "–");
@@ -549,14 +553,16 @@ function StoreHero({ store }) {
       </div>
 
       {/* Cover Photo for Small Screens (<1024px: positioned below dark card, 220px high) */}
-      <div className="block lg:hidden w-full h-[220px] overflow-hidden rounded-b-[32px]">
-        <img
-          src={store.cover}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-center block"
-        />
-      </div>
+      {store.cover ? (
+        <div className="block lg:hidden w-full h-[220px] overflow-hidden rounded-b-[32px]">
+          <img
+            src={store.cover}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center block"
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
